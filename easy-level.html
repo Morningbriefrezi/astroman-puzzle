@@ -5,257 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ასტრომენი • მარტივი დონე</title>
   <style>
-    :root {
-      --bg1: #060914;
-      --bg2: #111a37;
-      --card: rgba(13, 20, 44, 0.92);
-      --text: #eef3ff;
-      --accent: #6fd3ff;
-      --accent2: #a88cff;
-      --ok: #50d69b;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      color: var(--text);
-      min-height: 100vh;
-      background: radial-gradient(circle at 20% 20%, #1a2a59 0%, var(--bg1) 35%, #04060f 100%);
-      display: grid;
-      place-items: center;
-      padding: 16px;
-      overflow-x: hidden;
-    }
-
-    .stars,
-    .stars::before,
-    .stars::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(2px 2px at 10% 20%, #ffffffd9 40%, transparent 45%),
-        radial-gradient(1.5px 1.5px at 40% 70%, #c8dcffcc 40%, transparent 45%),
-        radial-gradient(2px 2px at 80% 35%, #ffffffdd 40%, transparent 45%),
-        radial-gradient(1.2px 1.2px at 65% 85%, #dbe7ffcc 40%, transparent 45%),
-        radial-gradient(1.4px 1.4px at 88% 60%, #ffffffcc 40%, transparent 45%);
-      animation: twinkle 6s linear infinite;
-      pointer-events: none;
-    }
-
-    .stars::before { opacity: 0.6; animation-duration: 8s; }
-    .stars::after { opacity: 0.3; animation-duration: 10s; }
-
-    @keyframes twinkle {
-      0%, 100% { transform: translateY(0); opacity: 0.9; }
-      50% { transform: translateY(-6px); opacity: 0.6; }
-    }
-
-    .game {
-      width: min(100%, 520px);
-      background: var(--card);
-      border: 1px solid #2b3c75;
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), 0 0 28px rgba(111, 211, 255, 0.18);
-      backdrop-filter: blur(3px);
-      position: relative;
-      z-index: 1;
-    }
-
-    h1 {
-      margin: 0 0 8px;
-      font-size: 1.35rem;
-      color: var(--accent);
-      text-shadow: 0 0 12px #52b8ff88;
-      text-align: center;
-    }
-
-    .subtitle {
-      margin: 0 0 14px;
-      text-align: center;
-      font-size: 0.95rem;
-      color: #d6e1ff;
-    }
-
-    .planet-emoji {
-      font-size: 3.2rem;
-      text-align: center;
-      margin: 8px 0;
-      animation: floatPlanet 3s ease-in-out infinite;
-    }
-
-    @keyframes floatPlanet {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-7px); }
-    }
-
-    .clues {
-      background: #0f1836;
-      border-radius: 14px;
-      padding: 12px;
-      font-size: 0.96rem;
-      border: 1px solid #29457f;
-      line-height: 1.45;
-      margin-bottom: 12px;
-    }
-
-    .answers {
-      display: grid;
-      gap: 10px;
-    }
-
-    button {
-      border: 1px solid #4466b6;
-      background: linear-gradient(180deg, #1b2b59, #132044);
-      color: var(--text);
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    button:hover,
-    button:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 0 0 2px #6fd3ff44;
-      outline: none;
-    }
-
-    .status {
-      margin-top: 12px;
-      min-height: 26px;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .status.ok { color: var(--ok); }
-    .status.no { color: #ff8b9c; }
-
-    .score {
-      text-align: center;
-      margin-top: 8px;
-      font-size: 0.95rem;
-      color: #d7e8ff;
-    }
-
-    .footer {
-      margin-top: 12px;
-      text-align: center;
-      font-size: 0.72rem;
-      color: #9fb0d8;
-      opacity: 0.85;
-    }
+    :root { --bg:#070b18; --card:#0f1a39e8; --line:#3659a5; --text:#eef4ff; --accent:#7edfff; --ok:#52d69f; --bad:#ff91a8; }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;font-family:"Segoe UI",system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at 20% 20%,#1f2f65,transparent 40%),linear-gradient(180deg,#080e20,var(--bg));display:grid;place-items:center;padding:14px}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 12% 20%,#fff 35%,transparent 40%),radial-gradient(1.4px 1.4px at 42% 70%,#dce9ff 35%,transparent 40%),radial-gradient(1.4px 1.4px at 82% 35%,#fff 35%,transparent 40%);opacity:.75;animation:tw 7s infinite}
+    @keyframes tw{50%{opacity:.95}}
+    .game{width:min(100%,560px);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 20px 40px rgba(0,0,0,.45),0 0 24px rgba(126,223,255,.2);position:relative;z-index:1}
+    h1{margin:0;color:var(--accent);text-align:center} .sub{margin:8px 0 14px;text-align:center;color:#d8e5ff}
+    .emoji{text-align:center;font-size:3rem;animation:float 3s ease-in-out infinite} @keyframes float{50%{transform:translateY(-7px)}}
+    .box{background:#101b3b;border:1px solid #34559d;border-radius:14px;padding:12px;line-height:1.45}
+    .answers{display:grid;gap:10px;margin-top:12px}
+    button{border:1px solid #4d73c2;background:linear-gradient(180deg,#223972,#172850);color:var(--text);border-radius:12px;padding:10px;font-weight:700;cursor:pointer}
+    button:hover{transform:translateY(-1px)}
+    .status{margin-top:10px;min-height:22px;font-weight:700;text-align:center}.ok{color:var(--ok)}.bad{color:var(--bad)}
+    .score{text-align:center;margin-top:8px;color:#d8e6ff}.footer{font-size:.72rem;text-align:center;margin-top:10px;color:#9eb2de}
   </style>
 </head>
 <body>
-  <div class="stars" aria-hidden="true"></div>
-
   <main class="game">
-    <h1>🚀 რომელი პლანეტაა?</h1>
-    <p class="subtitle">მარტივი დონე • წაიკითხე 3 მინიშნება და აირჩიე სწორი პასუხი</p>
-
-    <div class="planet-emoji" id="planetEmoji">🪐</div>
-
-    <div class="clues" id="clueBox"></div>
-
+    <h1>🌟 კოსმოსური გამოცანა</h1>
+    <p class="sub">მარტივი დონე • ახლა უკვე 8 რაუნდი</p>
+    <div class="emoji" id="emoji">🪐</div>
+    <div class="box" id="clues"></div>
     <div class="answers" id="answers"></div>
-
     <div class="status" id="status"></div>
     <div class="score" id="score">ქულა: 0 / 0</div>
-
-    <div class="footer">ASTROMAN • კოსმოსი ყოველდღიურ შთაგონებად</div>
+    <div class="footer">ASTROMAN • დაწერე შენი შედეგი კომენტარებში</div>
   </main>
-
   <script>
-    const puzzles = [
-      {
-        emoji: "🔴",
-        clues: ["ჩემს ზედაპირს წითელი ფერი აქვს", "მარსმავალი რობოტები ხშირად მიკვლევენ", "დედამიწის მეზობელი ვარ"],
-        options: ["ვენერა", "მარსი", "იუპიტერი", "ურანი"],
-        answer: "მარსი"
-      },
-      {
-        emoji: "🪐",
-        clues: ["დიდი რგოლებით ვარ ცნობილი", "გაზის გიგანტი ვარ", "მზიდან მეექვსე პლანეტა ვარ"],
-        options: ["ნეპტუნი", "სატურნი", "მერკური", "მარსი"],
-        answer: "სატურნი"
-      },
-      {
-        emoji: "🌍",
-        clues: ["ამ პლანეტაზე სიცოცხლეა", "71% წყლით არის დაფარული", "მზიდან მესამე პლანეტაა"],
-        options: ["დედამიწა", "ვენერა", "იუპიტერი", "მერკური"],
-        answer: "დედამიწა"
-      }
+    const rounds=[
+      {e:"🔴",c:["წითელ პლანეტას მეძახიან","აქ მრავალი როვერი დადიოდა","დედამიწის მეზობელი ვარ"],o:["მარსი","ვენერა","იუპიტერი","ურანი"],a:"მარსი"},
+      {e:"🪐",c:["დიდი რგოლებით ვარ ცნობილი","გაზის გიგანტი ვარ","მზიდან მეექვსე ვარ"],o:["სატურნი","ნეპტუნი","მერკური","ვენერა"],a:"სატურნი"},
+      {e:"🌍",c:["აქ სიცოცხლეა","ძალიან ბევრი წყალი მაქვს","მზიდან მესამე პლანეტა ვარ"],o:["დედამიწა","მარსი","იუპიტერი","ვენერა"],a:"დედამიწა"},
+      {e:"☀️",c:["სისტემის ცენტრი ვარ","ვარსკვლავი ვარ","შუქს და სითბოს ვაძლევ პლანეტებს"],o:["მზე","სირიუსი","პოლარისი","ანდრომედა"],a:"მზე"},
+      {e:"🌕",c:["დედამიწის თანამგზავრი ვარ","ღამით ვანათებ","ჩემზე ადამიანი იყო"],o:["მთვარე","მარსი","ევროპა","ტიტანი"],a:"მთვარე"},
+      {e:"⚡",c:["ჩემზე ყველაზე დიდი ქარიშხალია","ყველაზე დიდი პლანეტა ვარ","დიდი წითელი ლაქა მაქვს"],o:["იუპიტერი","სატურნი","ვენერა","მერკური"],a:"იუპიტერი"},
+      {e:"💨",c:["ძალიან ცხელი ვარ","სიმკვრივე მაღალი ატმოსფერო მაქვს","დილის ვარსკვლავსაც მეძახიან"],o:["ვენერა","ნეპტუნი","მარსი","სატურნი"],a:"ვენერა"},
+      {e:"🔵",c:["ღრმა ლურჯი ფერი მაქვს","ძალიან ძლიერი ქარები მაქვს","მზიდან მერვე პლანეტა ვარ"],o:["ნეპტუნი","ურანი","იუპიტერი","მერკური"],a:"ნეპტუნი"}
     ];
-
-    let order = [...puzzles].sort(() => Math.random() - 0.5);
-    let index = 0;
-    let points = 0;
-
-    const clueBox = document.getElementById("clueBox");
-    const answers = document.getElementById("answers");
-    const status = document.getElementById("status");
-    const score = document.getElementById("score");
-    const planetEmoji = document.getElementById("planetEmoji");
-
-    function drawRound() {
-      status.textContent = "";
-      status.className = "status";
-
-      if (index >= order.length) {
-        clueBox.innerHTML = `თამაში დასრულდა! შენ დააგროვე <strong>${points}</strong> ქულა.`;
-        answers.innerHTML = "<button onclick='restartGame()'>თავიდან თამაში</button>";
-        planetEmoji.textContent = "✨";
-        score.textContent = `საბოლოო შედეგი: ${points} / ${order.length}`;
-        return;
-      }
-
-      const current = order[index];
-      planetEmoji.textContent = current.emoji;
-      clueBox.innerHTML = `<strong>მინიშნებები:</strong><br>1) ${current.clues[0]}<br>2) ${current.clues[1]}<br>3) ${current.clues[2]}`;
-
-      answers.innerHTML = "";
-      current.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.addEventListener("click", () => checkAnswer(option));
-        answers.appendChild(btn);
-      });
-
-      score.textContent = `ქულა: ${points} / ${index}`;
-    }
-
-    function checkAnswer(option) {
-      const current = order[index];
-      const allButtons = answers.querySelectorAll("button");
-      allButtons.forEach(b => b.disabled = true);
-
-      if (option === current.answer) {
-        points++;
-        status.textContent = "სწორია! 🌟";
-        status.className = "status ok";
-      } else {
-        status.textContent = `არასწორია. სწორი პასუხი იყო: ${current.answer}`;
-        status.className = "status no";
-      }
-
-      index++;
-      setTimeout(drawRound, 1100);
-    }
-
-    function restartGame() {
-      order = [...puzzles].sort(() => Math.random() - 0.5);
-      index = 0;
-      points = 0;
-      drawRound();
-    }
-
-    drawRound();
+    let set=[...rounds].sort(()=>Math.random()-0.5),i=0,p=0;
+    const clues=document.getElementById('clues'),answers=document.getElementById('answers'),status=document.getElementById('status'),score=document.getElementById('score'),emoji=document.getElementById('emoji');
+    function draw(){status.textContent='';status.className='status';if(i>=set.length){clues.innerHTML=`🎉 დასრულდა! შენ დააგროვე <strong>${p}</strong> ქულა ${set.length}-დან.`;answers.innerHTML='<button onclick="restart()">თავიდან თამაში</button>';emoji.textContent='✨';score.textContent=`საბოლოო შედეგი: ${p}/${set.length}`;return;}const r=set[i];emoji.textContent=r.e;clues.innerHTML=`<strong>მინიშნებები:</strong><br>1) ${r.c[0]}<br>2) ${r.c[1]}<br>3) ${r.c[2]}`;answers.innerHTML='';r.o.forEach(x=>{const b=document.createElement('button');b.textContent=x;b.onclick=()=>check(x);answers.appendChild(b)});score.textContent=`ქულა: ${p} / ${i}`}
+    function check(x){const r=set[i];[...answers.children].forEach(b=>b.disabled=true);if(x===r.a){p++;status.textContent='სწორია! 🌠';status.className='status ok'}else{status.textContent=`არასწორია. სწორი პასუხი: ${r.a}`;status.className='status bad'}i++;setTimeout(draw,800)}
+    function restart(){set=[...rounds].sort(()=>Math.random()-0.5);i=0;p=0;draw()}
+    draw();
   </script>
 </body>
 </html>
