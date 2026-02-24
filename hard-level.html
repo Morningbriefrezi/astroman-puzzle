@@ -5,298 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ასტრომენი • რთული დონე</title>
   <style>
-    :root {
-      --bg: #03050d;
-      --card: rgba(10, 15, 32, 0.94);
-      --line: #30457b;
-      --text: #eef3ff;
-      --accent: #8de7ff;
-      --good: #52d79f;
-      --bad: #ff8fa7;
-      --warn: #ffd166;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 18% 15%, #1a2550 0%, transparent 34%),
-        radial-gradient(circle at 80% 20%, #253874 0%, transparent 30%),
-        linear-gradient(180deg, #060a18 0%, var(--bg) 100%);
-      display: grid;
-      place-items: center;
-      padding: 14px;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(2px 2px at 12% 30%, #fff 35%, transparent 40%),
-        radial-gradient(1.6px 1.6px at 65% 12%, #fff 35%, transparent 40%),
-        radial-gradient(1.3px 1.3px at 72% 66%, #dce9ff 35%, transparent 40%),
-        radial-gradient(1.4px 1.4px at 35% 80%, #fff 35%, transparent 40%),
-        radial-gradient(1.4px 1.4px at 90% 40%, #dce9ff 35%, transparent 40%);
-      opacity: 0.7;
-      animation: blink 8s linear infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 0.65; }
-      50% { opacity: 0.9; }
-    }
-
-    .quiz {
-      width: min(100%, 700px);
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.52), 0 0 28px rgba(141, 231, 255, 0.16);
-      position: relative;
-      z-index: 1;
-    }
-
-    h1 {
-      margin: 0;
-      text-align: center;
-      color: var(--accent);
-      font-size: 1.45rem;
-      text-shadow: 0 0 14px #8de7ff66;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin: 12px 0;
-      font-weight: 700;
-      font-size: 0.95rem;
-      flex-wrap: wrap;
-    }
-
-    .timer.warn { color: var(--warn); }
-
-    .question {
-      background: #101a38;
-      border: 1px solid #324f90;
-      border-radius: 14px;
-      padding: 12px;
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      font-size: 1rem;
-      line-height: 1.45;
-      margin-bottom: 12px;
-    }
-
-    .options {
-      display: grid;
-      gap: 10px;
-    }
-
-    .options button {
-      border: 1px solid #4264b4;
-      border-radius: 12px;
-      padding: 10px;
-      color: var(--text);
-      background: linear-gradient(180deg, #21386f, #15244b);
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .options button:hover,
-    .options button:focus-visible {
-      transform: translateY(-2px);
-      outline: none;
-      box-shadow: 0 0 0 2px #8de7ff40;
-    }
-
-    .msg {
-      margin-top: 10px;
-      min-height: 24px;
-      font-weight: 700;
-    }
-
-    .good { color: var(--good); }
-    .bad { color: var(--bad); }
-
-    .final {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 12px;
-      background: #0f1835;
-      border: 1px solid #3757a2;
-      display: none;
-      text-align: center;
-      line-height: 1.5;
-    }
-
-    .final button {
-      margin-top: 10px;
-      border: 1px solid #4f74c0;
-      background: linear-gradient(180deg, #253f7a, #172750);
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .footer {
-      margin-top: 12px;
-      text-align: center;
-      font-size: 0.72rem;
-      color: #9fb0d8;
-    }
+    :root{--bg:#050915;--card:#0f1935ea;--line:#3657a1;--text:#eef4ff;--accent:#8be6ff;--ok:#51d39b;--bad:#ff90a7;--warn:#ffd166}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:"Segoe UI",system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at 20% 10%,#20306a 0%,transparent 35%),linear-gradient(180deg,#070d1f,var(--bg));display:grid;place-items:center;padding:14px}
+    .app{width:min(100%,780px);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+    h1{margin:0;text-align:center;color:var(--accent)} .sub{text-align:center;margin:8px 0 12px;color:#d9e5ff}
+    .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}.tab{padding:8px 12px;border-radius:10px;border:1px solid #4f73be;background:#15244b;color:#fff;cursor:pointer}.tab.active{box-shadow:0 0 0 2px #8be6ff55}
+    .panel{display:none}.panel.active{display:block}
+    .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:700;margin:10px 0}.timer.warn{color:var(--warn)}
+    .q{background:#111c3c;border:1px solid #3557a2;border-radius:12px;padding:12px;line-height:1.45;min-height:70px}
+    .opts{display:grid;gap:8px;margin-top:10px}
+    button{border:1px solid #4d73c2;background:linear-gradient(180deg,#223972,#172850);color:#fff;border-radius:12px;padding:10px;font-weight:700;cursor:pointer}
+    .msg{min-height:22px;margin-top:8px;font-weight:700}.ok{color:var(--ok)}.bad{color:var(--bad)}
+    .final{margin-top:10px;background:#0f1836;border:1px solid #3557a2;border-radius:12px;padding:12px;display:none;text-align:center}
+    canvas{width:100%;max-width:520px;height:320px;background:linear-gradient(180deg,#080f24,#03060f);border:1px solid #3a5aa5;border-radius:14px;display:block;margin:0 auto}
+    .rocket-info{text-align:center;margin-top:10px}.controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+    .footer{margin-top:12px;text-align:center;font-size:.72rem;color:#9eb2de}
   </style>
 </head>
 <body>
-  <main class="quiz">
-    <h1>🛰️ კოსმოსური ექსკლუზიური ვიქტორინა</h1>
+<main class="app">
+  <h1>🛰️ რთული დონე • პრო სერია</h1>
+  <p class="sub">12-კითხვიანი დროული ვიქტორინა + რაკეტის ინტერაქტიული მინი-თამაში</p>
 
-    <div class="topbar">
-      <div id="progress">კითხვა: 1 / 8</div>
-      <div id="score">ქულა: 0</div>
-      <div id="timer" class="timer">დრო: 60 წმ</div>
-    </div>
+  <div class="tabs">
+    <button class="tab active" data-tab="quiz">კოსმოსური ვიქტორინა</button>
+    <button class="tab" data-tab="rocket">რაკეტის თამაში</button>
+  </div>
 
-    <div class="question" id="question"></div>
-    <div class="options" id="options"></div>
+  <section class="panel active" id="quiz">
+    <div class="top"><div id="progress">კითხვა: 1/12</div><div id="score">ქულა: 0</div><div id="timer" class="timer">დრო: 90 წმ</div></div>
+    <div class="q" id="question"></div>
+    <div class="opts" id="options"></div>
     <div class="msg" id="msg"></div>
-
     <div class="final" id="final"></div>
+  </section>
 
-    <div class="footer">ASTROMAN • კოსმოსის მოყვარულებისთვის</div>
-  </main>
+  <section class="panel" id="rocket">
+    <canvas id="game" width="520" height="320" aria-label="რაკეტის თამაში"></canvas>
+    <div class="rocket-info" id="rinfo">გადაადგილდი მარცხნივ/მარჯვნივ და აირიდე ასტეროიდები • დრო: 30 წმ</div>
+    <div class="controls">
+      <button id="leftBtn">⬅️ მარცხნივ</button>
+      <button id="startRocket">დაწყება</button>
+      <button id="rightBtn">მარჯვნივ ➡️</button>
+    </div>
+  </section>
 
-  <script>
-    const questions = [
-      { q: "რომელი პლანეტა ბრუნავს მზის გარშემო ყველაზე სწრაფად?", a: ["ვენერა", "მერკური", "მარსი", "იუპიტერი"], c: 1 },
-      { q: "რომელი ციური სხეული ცნობილია როგორც „დილის ვარსკვლავი“?", a: ["ვენერა", "სირიუსი", "იუპიტერი", "პოლარისი"], c: 0 },
-      { q: "სატურნის რგოლები ძირითადად რისგან შედგება?", a: ["რკინისგან", "ყინულისა და ქანის ნაწილაკებისგან", "გაზისგან", "პლაზმისგან"], c: 1 },
-      { q: "რომელი გალაქტიკაა ჩვენი სახლი?", a: ["ანდრომედა", "სამკუთხედის გალაქტიკა", "ირმის ნახტომი", "მაგელანის ღრუბელი"], c: 2 },
-      { q: "რა ეწოდება ვარსკვლავის დაბადების რეგიონს?", a: ["ნებულა", "პულსარი", "კვაზარი", "ასტეროიდული სარტყელი"], c: 0 },
-      { q: "რომელი პლანეტა ცნობილია ძლიერი ქარებითა და ღრმა ლურჯი ფერით?", a: ["ნეპტუნი", "ურანი", "დედამიწა", "ვენერა"], c: 0 },
-      { q: "რა არის სინათლის წლის სწორი განმარტება?", a: ["ერთი წელი სინათლის გარეშე", "მანძილი, რომელსაც სინათლე წელიწადში გადის", "სიჩქარე, რომლითაც ვარსკვლავი მოძრაობს", "დრო, როცა პლანეტა მზეს ერთხელ შემოუვლის"], c: 1 },
-      { q: "რომელ აპარატს მიეწერება პირველი ადამიანის გადასროლა მთვარეზე?", a: ["აპოლო 11", "ვოსტოკ 1", "ვოიაჯერ 1", "სოიუზ 1"], c: 0 }
-    ];
+  <div class="footer">ASTROMAN • დაწერე შენი შედეგი კომენტარებში</div>
+</main>
+<script>
+  document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById(t.dataset.tab).classList.add('active')});
 
-    let idx = 0;
-    let score = 0;
-    let timeLeft = 60;
-    let timerId;
+  const questions=[
+    {q:'რომელი პლანეტა ბრუნავს მზის გარშემო ყველაზე სწრაფად?',a:['მერკური','ვენერა','მარსი','იუპიტერი'],c:0},
+    {q:'რომელი სხეულია ცნობილი როგორც „დილის ვარსკვლავი“?',a:['ვენერა','სირიუსი','პოლარისი','იუპიტერი'],c:0},
+    {q:'სატურნის რგოლები ძირითადად არის...',a:['რკინა','ყინული და ქანის ნაწილაკები','პლაზმა','თხევადი წყალბადი'],c:1},
+    {q:'ჩვენი გალაქტიკაა...',a:['ანდრომედა','ირმის ნახტომი','სამკუთხედის გალაქტიკა','მაგელანის ღრუბელი'],c:1},
+    {q:'ვარსკვლავების დაბადების რეგიონს ეწოდება...',a:['ნებულა','კვაზარი','პულსარი','კომეტა'],c:0},
+    {q:'ღრმა ლურჯი პლანეტა ძლიერი ქარებით არის...',a:['ნეპტუნი','ურანი','ვენერა','მერკური'],c:0},
+    {q:'სინათლის წელი ნიშნავს...',a:['დროს','სიჩქარეს','მანძილს, რომელსაც სინათლე წელში გადის','ორბიტის პერიოდს'],c:2},
+    {q:'ადამიანის პირველი მთვარეზე დაჯდომა შესრულდა მისიით...',a:['აპოლო 11','ვოსტოკ 1','ვოიაჯერ 1','სოიუზ 1'],c:0},
+    {q:'რომელ პლანეტაზეა ყველაზე მაღალი მთა (ოლიმპოსი)?',a:['მარსი','დედამიწა','ვენერა','იუპიტერი'],c:0},
+    {q:'რომელი პლანეტაა მზიდან ყველაზე შორს?',a:['ურანი','ნეპტუნი','სატურნი','მარსი'],c:1},
+    {q:'რომელი ტელესკოპი მუშაობს კოსმოსში?',a:['ჰაბლი','კეკი','VLT','ALMA'],c:0},
+    {q:'ასტეროიდების მთავარი სარტყელი მდებარეობს...',a:['დედამიწასა და მარსს შორის','მარსსა და იუპიტერს შორის','იუპიტერსა და სატურნს შორის','ვენერასა და დედამიწას შორის'],c:1}
+  ].sort(()=>Math.random()-0.5);
+  let qi=0,score=0,time=90,timer;
+  const questionEl=document.getElementById('question'),optionsEl=document.getElementById('options'),msgEl=document.getElementById('msg'),progressEl=document.getElementById('progress'),scoreEl=document.getElementById('score'),timerEl=document.getElementById('timer'),finalEl=document.getElementById('final');
+  function startTimer(){clearInterval(timer);timer=setInterval(()=>{time--;timerEl.textContent=`დრო: ${time} წმ`;timerEl.classList.toggle('warn',time<=20);if(time<=0)finish(true)},1000)}
+  function drawQ(){if(qi>=questions.length)return finish(false);const q=questions[qi];progressEl.textContent=`კითხვა: ${qi+1}/${questions.length}`;scoreEl.textContent=`ქულა: ${score}`;questionEl.textContent=q.q;msgEl.textContent='';msgEl.className='msg';optionsEl.innerHTML='';q.a.forEach((x,i)=>{const b=document.createElement('button');b.textContent=x;b.onclick=()=>pick(i);optionsEl.appendChild(b)})}
+  function pick(i){const q=questions[qi];[...optionsEl.children].forEach(b=>b.disabled=true);if(i===q.c){score+=10;msgEl.textContent='სწორია! +10';msgEl.className='msg ok'}else{msgEl.textContent=`არასწორია. სწორი პასუხი: ${q.a[q.c]}`;msgEl.className='msg bad'}qi++;setTimeout(drawQ,700)}
+  function finish(timeout){clearInterval(timer);questionEl.style.display='none';optionsEl.style.display='none';msgEl.style.display='none';const rank=score>=90?'კოსმოსის ოსტატი':score>=60?'ვარსკვლავების მცოდნე':'კარგი მცდელობა';finalEl.style.display='block';finalEl.innerHTML=`<strong>${timeout?'დრო ამოიწურა!':'ვიქტორინა დასრულდა!'}</strong><br>ქულა: <strong>${score}</strong><br>რანგი: <strong>${rank}</strong><br><button id='restartQuiz'>თავიდან</button>`;document.getElementById('restartQuiz').onclick=()=>{qi=0;score=0;time=90;questionEl.style.display='block';optionsEl.style.display='grid';msgEl.style.display='block';finalEl.style.display='none';timerEl.classList.remove('warn');timerEl.textContent='დრო: 90 წმ';startTimer();drawQ()}}
+  startTimer();drawQ();
 
-    const questionEl = document.getElementById("question");
-    const optionsEl = document.getElementById("options");
-    const msgEl = document.getElementById("msg");
-    const progressEl = document.getElementById("progress");
-    const scoreEl = document.getElementById("score");
-    const timerEl = document.getElementById("timer");
-    const finalEl = document.getElementById("final");
-
-    function startTimer() {
-      clearInterval(timerId);
-      timerId = setInterval(() => {
-        timeLeft--;
-        timerEl.textContent = `დრო: ${timeLeft} წმ`;
-        timerEl.classList.toggle("warn", timeLeft <= 15);
-
-        if (timeLeft <= 0) {
-          finishQuiz(true);
-        }
-      }, 1000);
-    }
-
-    function renderQuestion() {
-      if (idx >= questions.length) {
-        finishQuiz(false);
-        return;
-      }
-
-      const current = questions[idx];
-      progressEl.textContent = `კითხვა: ${idx + 1} / ${questions.length}`;
-      scoreEl.textContent = `ქულა: ${score}`;
-      questionEl.textContent = current.q;
-      optionsEl.innerHTML = "";
-      msgEl.textContent = "";
-      msgEl.className = "msg";
-
-      current.a.forEach((answer, i) => {
-        const btn = document.createElement("button");
-        btn.textContent = `${String.fromCharCode(4304 + i)}) ${answer}`;
-        btn.addEventListener("click", () => choose(i));
-        optionsEl.appendChild(btn);
-      });
-    }
-
-    function choose(choiceIndex) {
-      const current = questions[idx];
-      const buttons = optionsEl.querySelectorAll("button");
-      buttons.forEach(b => b.disabled = true);
-
-      if (choiceIndex === current.c) {
-        score += 10;
-        msgEl.textContent = "სწორია! +10 ქულა";
-        msgEl.className = "msg good";
-      } else {
-        const correctAnswer = current.a[current.c];
-        msgEl.textContent = `არასწორია. სწორი პასუხი: ${correctAnswer}`;
-        msgEl.className = "msg bad";
-      }
-
-      idx++;
-      setTimeout(renderQuestion, 850);
-    }
-
-    function finishQuiz(timeout) {
-      clearInterval(timerId);
-      questionEl.style.display = "none";
-      optionsEl.style.display = "none";
-      msgEl.style.display = "none";
-
-      let rank = "კარგი მცდელობა";
-      if (score >= 70) rank = "კოსმოსის ოსტატი";
-      else if (score >= 40) rank = "ვარსკვლავების მცოდნე";
-
-      finalEl.style.display = "block";
-      finalEl.innerHTML = `
-        <strong>${timeout ? "დრო ამოიწურა!" : "ვიქტორინა დასრულდა!"}</strong><br>
-        შენი ქულა: <strong>${score}</strong><br>
-        შეფასება: <strong>${rank}</strong><br>
-        <button id="restartBtn">თავიდან თამაში</button>
-      `;
-
-      document.getElementById("restartBtn").addEventListener("click", restart);
-      scoreEl.textContent = `ქულა: ${score}`;
-      timerEl.textContent = `დრო: ${timeLeft} წმ`;
-    }
-
-    function restart() {
-      idx = 0;
-      score = 0;
-      timeLeft = 60;
-      questionEl.style.display = "flex";
-      optionsEl.style.display = "grid";
-      msgEl.style.display = "block";
-      finalEl.style.display = "none";
-      timerEl.classList.remove("warn");
-      timerEl.textContent = `დრო: ${timeLeft} წმ`;
-      startTimer();
-      renderQuestion();
-    }
-
-    startTimer();
-    renderQuestion();
-  </script>
+  const cvs=document.getElementById('game'),ctx=cvs.getContext('2d');
+  const rocket={x:250,y:280,w:24,h:30,speed:24}; let ast=[]; let running=false; let rTime=30; let rScore=0; let raf; const rinfo=document.getElementById('rinfo');
+  function spawn(){ast.push({x:Math.random()*(cvs.width-20),y:-20,w:20,h:20,v:2+Math.random()*3})}
+  function draw(){ctx.clearRect(0,0,cvs.width,cvs.height);ctx.fillStyle='#fff';for(let i=0;i<35;i++)ctx.fillRect((i*37)%cvs.width,(i*53)%cvs.height,1.5,1.5);ctx.fillStyle='#7edfff';ctx.beginPath();ctx.moveTo(rocket.x,rocket.y+rocket.h);ctx.lineTo(rocket.x+rocket.w/2,rocket.y);ctx.lineTo(rocket.x+rocket.w,rocket.y+rocket.h);ctx.closePath();ctx.fill();ctx.fillStyle='#ffb347';ctx.fillRect(rocket.x+rocket.w/2-3,rocket.y+rocket.h,6,8);ctx.fillStyle='#c7d7ff';ast.forEach(a=>ctx.fillRect(a.x,a.y,a.w,a.h));}
+  function hit(a){return rocket.x<a.x+a.w&&rocket.x+rocket.w>a.x&&rocket.y<a.y+a.h&&rocket.y+rocket.h>a.y}
+  function loop(){if(!running)return; if(Math.random()<0.06)spawn(); ast.forEach(a=>a.y+=a.v); ast=ast.filter(a=>a.y<cvs.height+30); if(ast.some(hit)){running=false;cancelAnimationFrame(raf);rinfo.textContent=`💥 შეჯახება! ქულა: ${rScore}. სცადე თავიდან.`;return;} rScore++; draw(); raf=requestAnimationFrame(loop)}
+  let tInt;
+  function startRocket(){rocket.x=250;ast=[];rScore=0;rTime=30;running=true;clearInterval(tInt);tInt=setInterval(()=>{rTime--;rinfo.textContent=`დრო: ${rTime} წმ • ქულა: ${rScore}`;if(rTime<=0){running=false;clearInterval(tInt);cancelAnimationFrame(raf);rinfo.textContent=`🚀 დასრულდა! შენი ქულა: ${rScore}`;}},1000);loop()}
+  document.getElementById('startRocket').onclick=startRocket;
+  function move(d){rocket.x=Math.max(0,Math.min(cvs.width-rocket.w,rocket.x+d));}
+  document.getElementById('leftBtn').onclick=()=>move(-rocket.speed); document.getElementById('rightBtn').onclick=()=>move(rocket.speed);
+  window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')move(-rocket.speed);if(e.key==='ArrowRight')move(rocket.speed)});
+  draw();
+</script>
 </body>
 </html>
