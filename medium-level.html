@@ -5,265 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ასტრომენი • საშუალო დონე</title>
   <style>
-    :root {
-      --bg: #050814;
-      --card: #0f1835e8;
-      --line: #345297;
-      --text: #f0f5ff;
-      --glow: #74d4ff;
-      --ok: #51d39b;
-      --bad: #ff8ea0;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      color: var(--text);
-      background: radial-gradient(circle at 70% 15%, #1f2d61 0%, #0b1230 30%, var(--bg) 100%);
-      padding: 14px;
-      display: grid;
-      place-items: center;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(2px 2px at 15% 20%, #fff 30%, transparent 35%),
-        radial-gradient(1.5px 1.5px at 60% 30%, #d6e5ff 30%, transparent 35%),
-        radial-gradient(1.2px 1.2px at 75% 80%, #fff 30%, transparent 35%),
-        radial-gradient(1.4px 1.4px at 30% 75%, #d6e5ff 30%, transparent 35%);
-      opacity: 0.75;
-      animation: drift 7s ease-in-out infinite;
-    }
-
-    @keyframes drift {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .game {
-      width: min(100%, 680px);
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45), 0 0 24px rgba(116, 212, 255, 0.18);
-    }
-
-    h1 {
-      margin: 0;
-      text-align: center;
-      color: var(--glow);
-      text-shadow: 0 0 12px #74d4ff66;
-      font-size: 1.4rem;
-    }
-
-    .hint {
-      text-align: center;
-      margin: 8px 0 14px;
-      color: #dce8ff;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .bank,
-    .slots {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    @media (min-width: 540px) {
-      .bank,
-      .slots { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-
-    .planet,
-    .slot {
-      border: 1px solid #3f60ad;
-      border-radius: 12px;
-      padding: 10px;
-      min-height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-weight: 600;
-      background: linear-gradient(180deg, #1a2a56, #121c3d);
-      transition: .2s;
-    }
-
-    .planet { cursor: pointer; }
-    .planet.selected {
-      border-color: #7de2ff;
-      box-shadow: 0 0 0 2px #7de2ff4f;
-      transform: translateY(-2px);
-    }
-
-    .slot {
-      flex-direction: column;
-      gap: 6px;
-      color: #d1dcfa;
-      background: #0f1733;
-      cursor: pointer;
-    }
-
-    .slot small { opacity: 0.85; }
-    .slot .filled { color: #fff; }
-
-    .actions {
-      margin-top: 14px;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    button {
-      border: 1px solid #4b70bd;
-      color: #f1f5ff;
-      background: linear-gradient(180deg, #223670, #15224a);
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .result {
-      margin-top: 12px;
-      text-align: center;
-      min-height: 22px;
-      font-weight: 700;
-    }
-
-    .ok { color: var(--ok); }
-    .bad { color: var(--bad); }
-
-    .footer {
-      margin-top: 12px;
-      text-align: center;
-      font-size: 0.72rem;
-      color: #9fb0d8;
-    }
+    :root{--bg:#070b18;--card:#101a36ec;--line:#36559a;--text:#eef4ff;--accent:#7edfff;--ok:#52d69f;--bad:#ff91a8}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:"Segoe UI",system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at 70% 15%,#21326b 0%,transparent 35%),linear-gradient(180deg,#080f22,var(--bg));display:grid;place-items:center;padding:14px}
+    .game{width:min(100%,760px);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 18px 44px rgba(0,0,0,.45)}
+    h1{text-align:center;margin:0;color:var(--accent)} .sub{text-align:center;margin:8px 0 14px;color:#d8e5ff}
+    .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}.tab{padding:8px 12px;border-radius:10px;border:1px solid #4f73be;background:#14224a;color:#eef4ff;cursor:pointer}.tab.active{box-shadow:0 0 0 2px #7edfff50}
+    .panel{display:none}.panel.active{display:block}
+    .bank,.slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}@media(min-width:560px){.bank,.slots{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    .planet,.slot{border:1px solid #3f60ad;border-radius:12px;padding:10px;min-height:56px;display:flex;align-items:center;justify-content:center;text-align:center;background:#132043;font-weight:700}
+    .planet{cursor:pointer}.planet.selected{box-shadow:0 0 0 2px #7edfff55}
+    .slot{cursor:pointer;flex-direction:column;gap:4px}.slot small{opacity:.8;font-weight:500}
+    .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    button{border:1px solid #4d73c2;background:linear-gradient(180deg,#223972,#172850);color:#fff;border-radius:12px;padding:10px 12px;font-weight:700;cursor:pointer}
+    .result{min-height:22px;text-align:center;margin-top:10px;font-weight:700}.ok{color:var(--ok)}.bad{color:var(--bad)}
+    .quiz-card{background:#101b3b;border:1px solid #3658a5;border-radius:14px;padding:12px}
+    .q{font-weight:700;margin-bottom:10px}.opts{display:grid;gap:8px}
+    .footer{margin-top:12px;text-align:center;font-size:.72rem;color:#9eb2de}
   </style>
 </head>
 <body>
-  <main class="game">
-    <h1>🧠 პლანეტების რიგი მზიდან</h1>
-    <p class="hint">აირჩიე პლანეტა ქვემოდან და შეეხე შესაბამის პოზიციას (1-6).<br>მიზანი: დაალაგო მზიდან სწორ თანმიმდევრობაში.</p>
+<main class="game">
+  <h1>🧠 საშუალო დონე • ორი რეჟიმი</h1>
+  <p class="sub">1) პლანეტების დალაგება • 2) სწრაფი 6-კითხვიანი ვიქტორინა</p>
 
-    <section>
-      <h3>ასარჩევი პლანეტები</h3>
-      <div class="bank" id="bank"></div>
-    </section>
+  <div class="tabs">
+    <button class="tab active" data-tab="order">პლანეტების რიგი</button>
+    <button class="tab" data-tab="quiz">სწრაფი ვიქტორინა</button>
+  </div>
 
-    <section>
-      <h3>შენი რიგი</h3>
-      <div class="slots" id="slots"></div>
-    </section>
+  <section class="panel active" id="order">
+    <div class="bank" id="bank"></div>
+    <div class="slots" id="slots" style="margin-top:10px"></div>
+    <div class="actions"><button id="checkOrder">შემოწმება</button><button id="resetOrder">გასუფთავება</button></div>
+    <div class="result" id="orderResult"></div>
+  </section>
 
-    <div class="actions">
-      <button id="checkBtn">შედეგის შემოწმება</button>
-      <button id="resetBtn">გასუფთავება</button>
+  <section class="panel" id="quiz">
+    <div class="quiz-card">
+      <div class="q" id="mq"></div>
+      <div class="opts" id="mopts"></div>
+      <div class="result" id="mres"></div>
+      <div class="actions"><button id="mnext">შემდეგი კითხვა</button><button id="mrestart">თავიდან</button></div>
+      <div class="result" id="mscore"></div>
     </div>
+  </section>
 
-    <div class="result" id="result"></div>
+  <div class="footer">ASTROMAN • დაწერე შენი შედეგი კომენტარებში</div>
+</main>
+<script>
+  document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById(t.dataset.tab).classList.add('active')});
 
-    <div class="footer">ASTROMAN • ვსწავლობთ კოსმოსს თამაშით</div>
-  </main>
+  const correct=["მერკური","ვენერა","დედამიწა","მარსი","იუპიტერი","სატურნი","ურანი","ნეპტუნი"];
+  const pool=[...correct].sort(()=>Math.random()-0.5); const state=new Array(correct.length).fill(null); let selected=null;
+  const bank=document.getElementById('bank'),slots=document.getElementById('slots'),orderResult=document.getElementById('orderResult');
+  function drawBank(){bank.innerHTML='';pool.forEach(n=>{const used=state.includes(n);const d=document.createElement('div');d.className='planet'+(selected===n?' selected':'');d.textContent=used?`${n} ✓`:n;d.style.opacity=used?.45:1;d.style.pointerEvents=used?'none':'auto';if(!used)d.onclick=()=>{selected=selected===n?null:n;drawBank()};bank.appendChild(d)})}
+  function drawSlots(){slots.innerHTML='';state.forEach((p,i)=>{const s=document.createElement('div');s.className='slot';s.innerHTML=`<small>${i+1}-ე პოზიცია</small><div>${p??'—'}</div>`;s.onclick=()=>{if(!selected)return;state[i]=selected;selected=null;orderResult.textContent='';orderResult.className='result';drawSlots();drawBank()};slots.appendChild(s)})}
+  document.getElementById('checkOrder').onclick=()=>{if(state.includes(null)){orderResult.textContent='ყველა პოზიცია შეავსე.';orderResult.className='result bad';return;}let sc=0;state.forEach((x,i)=>{if(x===correct[i])sc++});orderResult.textContent=sc===correct.length?`იდეალურია! ${sc}/${correct.length}`:`შედეგი: ${sc}/${correct.length}`;orderResult.className='result '+(sc===correct.length?'ok':'bad')}
+  document.getElementById('resetOrder').onclick=()=>{for(let i=0;i<state.length;i++)state[i]=null;selected=null;orderResult.textContent='';orderResult.className='result';drawSlots();drawBank()}
+  drawSlots();drawBank();
 
-  <script>
-    const correctOrder = ["მერკური", "ვენერა", "დედამიწა", "მარსი", "იუპიტერი", "სატურნი"];
-    const shuffled = [...correctOrder].sort(() => Math.random() - 0.5);
-
-    const bankEl = document.getElementById("bank");
-    const slotsEl = document.getElementById("slots");
-    const resultEl = document.getElementById("result");
-
-    let selectedPlanet = null;
-    const slotState = new Array(correctOrder.length).fill(null);
-
-    function renderBank() {
-      bankEl.innerHTML = "";
-      shuffled.forEach(name => {
-        const used = slotState.includes(name);
-        const div = document.createElement("div");
-        div.className = "planet" + (selectedPlanet === name ? " selected" : "");
-        div.textContent = used ? `${name} ✓` : name;
-        div.style.opacity = used ? "0.45" : "1";
-        div.style.pointerEvents = used ? "none" : "auto";
-
-        if (!used) {
-          div.addEventListener("click", () => {
-            selectedPlanet = selectedPlanet === name ? null : name;
-            renderBank();
-          });
-        }
-
-        bankEl.appendChild(div);
-      });
-    }
-
-    function renderSlots() {
-      slotsEl.innerHTML = "";
-      slotState.forEach((planet, i) => {
-        const slot = document.createElement("div");
-        slot.className = "slot";
-        slot.innerHTML = `<small>${i + 1}-ე პოზიცია</small><span class="filled">${planet ?? "—"}</span>`;
-        slot.addEventListener("click", () => {
-          if (!selectedPlanet) return;
-          slotState[i] = selectedPlanet;
-          selectedPlanet = null;
-          resultEl.textContent = "";
-          resultEl.className = "result";
-          renderSlots();
-          renderBank();
-        });
-        slotsEl.appendChild(slot);
-      });
-    }
-
-    function checkResult() {
-      if (slotState.includes(null)) {
-        resultEl.textContent = "ჯერ ყველა პოზიცია შეავსე.";
-        resultEl.className = "result bad";
-        return;
-      }
-
-      let score = 0;
-      slotState.forEach((p, i) => {
-        if (p === correctOrder[i]) score++;
-      });
-
-      if (score === correctOrder.length) {
-        resultEl.textContent = `ბრწყინვალეა! შენ სწორად დაალაგე ყველა პლანეტა (${score}/${correctOrder.length}).`;
-        resultEl.className = "result ok";
-      } else {
-        resultEl.textContent = `შედეგი: ${score}/${correctOrder.length}. სცადე თავიდან უკეთესი შედეგისთვის.`;
-        resultEl.className = "result bad";
-      }
-    }
-
-    function resetGame() {
-      for (let i = 0; i < slotState.length; i++) slotState[i] = null;
-      selectedPlanet = null;
-      resultEl.textContent = "";
-      resultEl.className = "result";
-      renderSlots();
-      renderBank();
-    }
-
-    document.getElementById("checkBtn").addEventListener("click", checkResult);
-    document.getElementById("resetBtn").addEventListener("click", resetGame);
-
-    renderSlots();
-    renderBank();
-  </script>
+  const qs=[
+    {q:'რომელი პლანეტაა ყველაზე დიდი?',a:['იუპიტერი','სატურნი','მარსი','ვენერა'],c:0},
+    {q:'რომელია მზიდან პირველი?',a:['ვენერა','მერკური','დედამიწა','ნეპტუნი'],c:1},
+    {q:'„წითელი პლანეტა“ რომელი არის?',a:['მარსი','ურანი','სატურნი','მერკური'],c:0},
+    {q:'სატურნი ცნობილია...',a:['ყინულის მთებით','რგოლებით','მთვარის გარეშე','მწვანე ფერით'],c:1},
+    {q:'დედამიწის ბუნებრივი თანამგზავრია...',a:['იო','ევროპა','მთვარე','ტიტანი'],c:2},
+    {q:'რომელი პლანეტაა ღრმა ლურჯი?',a:['ნეპტუნი','ვენერა','მარსი','მერკური'],c:0}
+  ];
+  let qi=0,qp=0,locked=false; const mq=document.getElementById('mq'),mopts=document.getElementById('mopts'),mres=document.getElementById('mres'),mscore=document.getElementById('mscore');
+  function drawQ(){if(qi>=qs.length){mq.textContent='🎉 ვიქტორინა დასრულდა!';mopts.innerHTML='';mres.textContent='';mscore.textContent=`საბოლოო ქულა: ${qp}/${qs.length}`;mscore.className='result '+(qp>=4?'ok':'bad');return;}locked=false;mres.textContent='';const q=qs[qi];mq.textContent=`კითხვა ${qi+1}/${qs.length}: ${q.q}`;mopts.innerHTML='';q.a.forEach((x,i)=>{const b=document.createElement('button');b.textContent=x;b.onclick=()=>{if(locked)return;locked=true;if(i===q.c){qp++;mres.textContent='სწორია!';mres.className='result ok'}else{mres.textContent='არასწორია';mres.className='result bad'}mscore.textContent=`ქულა: ${qp}/${qi+1}`};mopts.appendChild(b)})}
+  document.getElementById('mnext').onclick=()=>{if(qi<qs.length)qi++;drawQ()};
+  document.getElementById('mrestart').onclick=()=>{qi=0;qp=0;drawQ()};
+  drawQ();
+</script>
 </body>
 </html>
