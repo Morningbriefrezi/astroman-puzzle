@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASTROMAN • კოსმოსური თამაშები</title>
+  <style>
+    :root{
+      --bg:#060a16;
+      --card:#101a36ee;
+      --line:#37559b;
+      --text:#eef4ff;
+      --accent:#79dcff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Segoe UI",system-ui,sans-serif;
+      color:var(--text);
+      background: radial-gradient(circle at 20% 15%, #1e2e62 0%, transparent 35%),
+                  radial-gradient(circle at 80% 20%, #253a78 0%, transparent 35%),
+                  linear-gradient(180deg,#090f21,var(--bg));
+      display:grid;
+      place-items:center;
+      padding:16px;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(2px 2px at 10% 20%, #fff 35%, transparent 40%),
+        radial-gradient(1.5px 1.5px at 30% 70%, #d8e8ff 35%, transparent 40%),
+        radial-gradient(1.6px 1.6px at 70% 25%, #fff 35%, transparent 40%),
+        radial-gradient(1.2px 1.2px at 80% 75%, #d8e8ff 35%, transparent 40%);
+      opacity:.8;
+      animation:twinkle 7s ease-in-out infinite;
+    }
+    @keyframes twinkle{0%,100%{opacity:.75}50%{opacity:1}}
+
+    .wrap{
+      width:min(100%,650px);
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+      box-shadow:0 18px 45px rgba(0,0,0,.45),0 0 28px rgba(121,220,255,.2);
+      position:relative;
+      z-index:1;
+    }
+    h1{margin:0 0 8px;text-align:center;color:var(--accent)}
+    p{margin:0 0 16px;text-align:center;line-height:1.5;color:#dce8ff}
+    .games{display:grid;gap:12px}
+    a{
+      text-decoration:none;
+      color:var(--text);
+      border:1px solid #476bb9;
+      border-radius:14px;
+      padding:12px;
+      display:block;
+      background:linear-gradient(180deg,#21386f,#15254e);
+      font-weight:700;
+      transition:.2s;
+    }
+    a span{display:block;font-weight:500;font-size:.9rem;color:#d7e4ff;margin-top:4px}
+    a:hover,a:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 2px #79dcff44;outline:none}
+    .tip{margin-top:14px;font-size:.9rem;color:#c8d8ff;text-align:center}
+    .footer{margin-top:12px;font-size:.72rem;text-align:center;color:#9eb1dc}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>🚀 ASTROMAN კოსმოსური თამაშები</h1>
+    <p>აირჩიე სირთულის დონე და ითამაშე პირდაპირ ბრაუზერში.</p>
+
+    <section class="games">
+      <a href="easy-level.html">🌟 მარტივი დონე
+        <span>გამოიცანი პლანეტა 3 მინიშნებით</span>
+      </a>
+      <a href="medium-level.html">🧠 საშუალო დონე
+        <span>დაალაგე პლანეტები მზიდან სწორ რიგში</span>
+      </a>
+      <a href="hard-level.html">🛰️ რთული დონე
+        <span>60-წამიანი ასტრონომიული ვიქტორინა</span>
+      </a>
+    </section>
+
+    <div class="tip">დაწერე შენი შედეგი კომენტარებში და გაუზიარე მეგობრებს ⭐</div>
+    <div class="footer">ASTROMAN • კოსმოსი ყოველდღიურ შთაგონებად</div>
+  </main>
+</body>
+</html>
