@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ასტრომენი • რთული დონე</title>
+  <style>
+    :root {
+      --bg: #03050d;
+      --card: rgba(10, 15, 32, 0.94);
+      --line: #30457b;
+      --text: #eef3ff;
+      --accent: #8de7ff;
+      --good: #52d79f;
+      --bad: #ff8fa7;
+      --warn: #ffd166;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 15%, #1a2550 0%, transparent 34%),
+        radial-gradient(circle at 80% 20%, #253874 0%, transparent 30%),
+        linear-gradient(180deg, #060a18 0%, var(--bg) 100%);
+      display: grid;
+      place-items: center;
+      padding: 14px;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(2px 2px at 12% 30%, #fff 35%, transparent 40%),
+        radial-gradient(1.6px 1.6px at 65% 12%, #fff 35%, transparent 40%),
+        radial-gradient(1.3px 1.3px at 72% 66%, #dce9ff 35%, transparent 40%),
+        radial-gradient(1.4px 1.4px at 35% 80%, #fff 35%, transparent 40%),
+        radial-gradient(1.4px 1.4px at 90% 40%, #dce9ff 35%, transparent 40%);
+      opacity: 0.7;
+      animation: blink 8s linear infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.65; }
+      50% { opacity: 0.9; }
+    }
+
+    .quiz {
+      width: min(100%, 700px);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.52), 0 0 28px rgba(141, 231, 255, 0.16);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.45rem;
+      text-shadow: 0 0 14px #8de7ff66;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin: 12px 0;
+      font-weight: 700;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    .timer.warn { color: var(--warn); }
+
+    .question {
+      background: #101a38;
+      border: 1px solid #324f90;
+      border-radius: 14px;
+      padding: 12px;
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .options button {
+      border: 1px solid #4264b4;
+      border-radius: 12px;
+      padding: 10px;
+      color: var(--text);
+      background: linear-gradient(180deg, #21386f, #15244b);
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .options button:hover,
+    .options button:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+      box-shadow: 0 0 0 2px #8de7ff40;
+    }
+
+    .msg {
+      margin-top: 10px;
+      min-height: 24px;
+      font-weight: 700;
+    }
+
+    .good { color: var(--good); }
+    .bad { color: var(--bad); }
+
+    .final {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #0f1835;
+      border: 1px solid #3757a2;
+      display: none;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .final button {
+      margin-top: 10px;
+      border: 1px solid #4f74c0;
+      background: linear-gradient(180deg, #253f7a, #172750);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .footer {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: #9fb0d8;
+    }
+  </style>
+</head>
+<body>
+  <main class="quiz">
+    <h1>🛰️ კოსმოსური ექსკლუზიური ვიქტორინა</h1>
+
+    <div class="topbar">
+      <div id="progress">კითხვა: 1 / 8</div>
+      <div id="score">ქულა: 0</div>
+      <div id="timer" class="timer">დრო: 60 წმ</div>
+    </div>
+
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="msg" id="msg"></div>
+
+    <div class="final" id="final"></div>
+
+    <div class="footer">ASTROMAN • კოსმოსის მოყვარულებისთვის</div>
+  </main>
+
+  <script>
+    const questions = [
+      { q: "რომელი პლანეტა ბრუნავს მზის გარშემო ყველაზე სწრაფად?", a: ["ვენერა", "მერკური", "მარსი", "იუპიტერი"], c: 1 },
+      { q: "რომელი ციური სხეული ცნობილია როგორც „დილის ვარსკვლავი“?", a: ["ვენერა", "სირიუსი", "იუპიტერი", "პოლარისი"], c: 0 },
+      { q: "სატურნის რგოლები ძირითადად რისგან შედგება?", a: ["რკინისგან", "ყინულისა და ქანის ნაწილაკებისგან", "გაზისგან", "პლაზმისგან"], c: 1 },
+      { q: "რომელი გალაქტიკაა ჩვენი სახლი?", a: ["ანდრომედა", "სამკუთხედის გალაქტიკა", "ირმის ნახტომი", "მაგელანის ღრუბელი"], c: 2 },
+      { q: "რა ეწოდება ვარსკვლავის დაბადების რეგიონს?", a: ["ნებულა", "პულსარი", "კვაზარი", "ასტეროიდული სარტყელი"], c: 0 },
+      { q: "რომელი პლანეტა ცნობილია ძლიერი ქარებითა და ღრმა ლურჯი ფერით?", a: ["ნეპტუნი", "ურანი", "დედამიწა", "ვენერა"], c: 0 },
+      { q: "რა არის სინათლის წლის სწორი განმარტება?", a: ["ერთი წელი სინათლის გარეშე", "მანძილი, რომელსაც სინათლე წელიწადში გადის", "სიჩქარე, რომლითაც ვარსკვლავი მოძრაობს", "დრო, როცა პლანეტა მზეს ერთხელ შემოუვლის"], c: 1 },
+      { q: "რომელ აპარატს მიეწერება პირველი ადამიანის გადასროლა მთვარეზე?", a: ["აპოლო 11", "ვოსტოკ 1", "ვოიაჯერ 1", "სოიუზ 1"], c: 0 }
+    ];
+
+    let idx = 0;
+    let score = 0;
+    let timeLeft = 60;
+    let timerId;
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const msgEl = document.getElementById("msg");
+    const progressEl = document.getElementById("progress");
+    const scoreEl = document.getElementById("score");
+    const timerEl = document.getElementById("timer");
+    const finalEl = document.getElementById("final");
+
+    function startTimer() {
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `დრო: ${timeLeft} წმ`;
+        timerEl.classList.toggle("warn", timeLeft <= 15);
+
+        if (timeLeft <= 0) {
+          finishQuiz(true);
+        }
+      }, 1000);
+    }
+
+    function renderQuestion() {
+      if (idx >= questions.length) {
+        finishQuiz(false);
+        return;
+      }
+
+      const current = questions[idx];
+      progressEl.textContent = `კითხვა: ${idx + 1} / ${questions.length}`;
+      scoreEl.textContent = `ქულა: ${score}`;
+      questionEl.textContent = current.q;
+      optionsEl.innerHTML = "";
+      msgEl.textContent = "";
+      msgEl.className = "msg";
+
+      current.a.forEach((answer, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = `${String.fromCharCode(4304 + i)}) ${answer}`;
+        btn.addEventListener("click", () => choose(i));
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function choose(choiceIndex) {
+      const current = questions[idx];
+      const buttons = optionsEl.querySelectorAll("button");
+      buttons.forEach(b => b.disabled = true);
+
+      if (choiceIndex === current.c) {
+        score += 10;
+        msgEl.textContent = "სწორია! +10 ქულა";
+        msgEl.className = "msg good";
+      } else {
+        const correctAnswer = current.a[current.c];
+        msgEl.textContent = `არასწორია. სწორი პასუხი: ${correctAnswer}`;
+        msgEl.className = "msg bad";
+      }
+
+      idx++;
+      setTimeout(renderQuestion, 850);
+    }
+
+    function finishQuiz(timeout) {
+      clearInterval(timerId);
+      questionEl.style.display = "none";
+      optionsEl.style.display = "none";
+      msgEl.style.display = "none";
+
+      let rank = "კარგი მცდელობა";
+      if (score >= 70) rank = "კოსმოსის ოსტატი";
+      else if (score >= 40) rank = "ვარსკვლავების მცოდნე";
+
+      finalEl.style.display = "block";
+      finalEl.innerHTML = `
+        <strong>${timeout ? "დრო ამოიწურა!" : "ვიქტორინა დასრულდა!"}</strong><br>
+        შენი ქულა: <strong>${score}</strong><br>
+        შეფასება: <strong>${rank}</strong><br>
+        <button id="restartBtn">თავიდან თამაში</button>
+      `;
+
+      document.getElementById("restartBtn").addEventListener("click", restart);
+      scoreEl.textContent = `ქულა: ${score}`;
+      timerEl.textContent = `დრო: ${timeLeft} წმ`;
+    }
+
+    function restart() {
+      idx = 0;
+      score = 0;
+      timeLeft = 60;
+      questionEl.style.display = "flex";
+      optionsEl.style.display = "grid";
+      msgEl.style.display = "block";
+      finalEl.style.display = "none";
+      timerEl.classList.remove("warn");
+      timerEl.textContent = `დრო: ${timeLeft} წმ`;
+      startTimer();
+      renderQuestion();
+    }
+
+    startTimer();
+    renderQuestion();
+  </script>
+</body>
+</html>
